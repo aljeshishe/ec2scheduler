@@ -1,0 +1,33 @@
+org: aljeshishe3
+app: ec2-schedule
+
+service: ec2-schedule
+provider:
+  name: aws
+  runtime: python3.9
+  region: eu-central-1
+  ecr:
+    images:
+      appimage:
+        path: ./
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - '*'
+      Resource: "*"
+
+#package:
+#  patterns:
+#    - handler.py
+#    - script.sh
+
+#custom:
+#  pythonRequirements:
+#    dockerizePip: true
+
+functions:
+    handler:
+      image: appimage
+#        handler: handler.handler
+#        events:
+#        - schedule: rate(5 minutes)
