@@ -2,4 +2,4 @@
 venv
 .serverless
 node_modules
-
+.idea
