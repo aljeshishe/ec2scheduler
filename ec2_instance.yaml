@@ -27,20 +27,20 @@ Resources:
       SecurityGroups:
         - !Ref InstanceSecurityGroup
       UserData: !Ref UserDataFile
-      IamInstanceProfile: !Ref DemoInstanceProfile
+      IamInstanceProfile: !Ref InstanceProfile
 
-  DemoInstanceProfile:
+  InstanceProfile:
     Type: AWS::IAM::InstanceProfile
     Properties:
-      InstanceProfileName: demo-ec2-instance-profile
+      InstanceProfileName: ec2scheduler-instance-profile
       Path: /
       Roles:
-       - !Ref DemoEc2InstanceRole
+        - !Ref Ec2InstanceRole
 
-  DemoEc2InstanceRole:
+  Ec2InstanceRole:
     Type: AWS::IAM::Role
     Properties:
-      RoleName: demo-ec2-instance-role
+      RoleName: ec2scheduler-instance-role
       AssumeRolePolicyDocument:
         Version: 2012-10-17
         Statement:
@@ -58,25 +58,6 @@ Resources:
               - Effect: Allow
                 Action: "*"
                 Resource: "*"
-
-
-
-#      IamInstanceProfile: !Ref MyRole
-#
-#  MyRole:
-#    Type: "AWS::IAM::Role"
-#    Properties:
-#      AssumeRolePolicyDocument:
-#        Version: "2012-10-17"
-#        Statement:
-#          - Effect: "Allow"
-#            Principal:
-#              Service: "ec2.amazonaws.com"
-#            Action: "sts:AssumeRole"
-#      Path: "/"
-#      ManagedPolicyArns:
-#        - "arn:aws:iam::aws:policy/AdministratorAccess"
-
 
 Outputs:
   InstanceId:

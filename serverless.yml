@@ -1,7 +1,8 @@
-org: aljeshishe3
-app: ec2-schedule
+# org: aljeshishe3
+# app: ec2scheduler
 
-service: ec2-schedule
+
+service: ec2scheduler
 provider:
   name: aws
   runtime: python3.9
@@ -15,15 +16,6 @@ provider:
       Action:
         - '*'
       Resource: "*"
-
-#package:
-#  patterns:
-#    - handler.py
-#    - script.sh
-
-#custom:
-#  pythonRequirements:
-#    dockerizePip: true
 
 functions:
     handler:
