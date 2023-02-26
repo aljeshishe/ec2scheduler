@@ -10,16 +10,20 @@ provider:
   ecr:
     images:
       appimage:
-        path: ./
+         path: ./ec2scheduler
   iamRoleStatements:
     - Effect: Allow
       Action:
         - '*'
       Resource: "*"
-
+package:
+  include:
+    - ec2scheduler/**
 functions:
     handler:
       image: appimage
+      environment:
+        TASK: docker run --rm curlimages/curl:latest  -X POST https://api.telegram.org/bot5803765903:AAH2ayWpVcook4JpoiHvMzgOvJCjsLItcmw/sendMessage -d chat_id=99044115 -d text=work
 #        handler: handler.handler
 #        events:
 #        - schedule: rate(5 minutes)

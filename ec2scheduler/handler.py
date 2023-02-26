@@ -3,7 +3,9 @@ import os
 
 def handler(event, context):
     print("start")
-    os.system("make stackstart")
+    task = os.environ.get("TASK")
+    print(f"task={task}")
+    os.system(f"make stackstop && TASK='{task}' make stackstart")
     print("end")
 
 
