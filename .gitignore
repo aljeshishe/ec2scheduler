@@ -21,3 +21,6 @@ var/
 .serverless
 node_modules
 .idea
+.gitsecret/keys/random_seed
+!*.secret
+.env
