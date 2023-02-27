@@ -1,5 +1,5 @@
 # syntax = docker/dockerfile:experimental
-FROM public.ecr.aws/lambda/python:3.8
+FROM public.ecr.aws/lambda/python:3.9
 WORKDIR ${LAMBDA_TASK_ROOT}
 RUN pip3 install awscli && \
     aws --profile default configure set region eu-central-1 && \
