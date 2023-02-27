@@ -1,3 +1,10 @@
+## Requirements
+make
+gpg
+git-secrets
+```
+brew install gpg make git-secrets
+```
 ## Execution
 
 * Makefile 
