@@ -1,6 +1,8 @@
 SHELL:=/usr/bin/env bash
 
 # $(V).SILENT:
+include .env
+export
 
 TMP_DIR = /tmp/ec2sheduler_oiun34filw
 STATE_FILE = $(TMP_DIR)/state.yaml
