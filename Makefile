@@ -20,14 +20,12 @@ LOCAL_IMAGE=${IMAGE_NAME}:${IMAGE_VERSION}
 
 .PHONY: setup
 setup:
-	git secret reveal
 	aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws
 	aws ecr-public create-repository --repository-name ${IMAGE_NAME} --region us-east-1 || true
 
 .PHONY: teardown
 teardown:
 	aws ecr-public delete-repository --repository-name ${IMAGE_NAME} --force --region us-east-1
-	git secret teardown
 
 .PHONY: build
 build:
