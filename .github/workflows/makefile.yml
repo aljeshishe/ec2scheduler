@@ -14,8 +14,9 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    #- name: Install dependencies
-    #  run: make ci
     - name: Install dependencies
       run: echo hello
+
+    - name: Run ci
+      run: make ci
 
