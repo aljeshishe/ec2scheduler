@@ -15,6 +15,7 @@ LOCAL_IMAGE=${IMAGE_NAME}:${IMAGE_VERSION}
 %:	  # thanks to chakrit
 	@:	# thanks to William Pursell
 
+
 .PHONY: setup
 setup:
 	aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws
@@ -22,7 +23,7 @@ setup:
 
 .PHONY: teardown
 teardown:
-	aws ecr-public delete-repository --repository-name ${IMAGE_NAME} --force
+	aws ecr-public delete-repository --repository-name ${IMAGE_NAME} --force --region us-east-1
 
 .PHONY: build
 build:
@@ -30,7 +31,7 @@ build:
 
 .PHONY: push
 push:
-	REPO_URI=$$(aws ecr-public describe-repositories --region us-east-1 --query 'repositories[?repositoryName==`ec2scheduler`].repositoryUri' --output text) && \
+	REPO_URI=$$(aws ecr-public describe-repositories --region us-east-1 --query 'repositories[?repositoryName==`${IMAGE_NAME}`].repositoryUri' --output text) && \
 	REMOTE_IMAGE=$${REPO_URI}:${IMAGE_VERSION} && \
 	echo Pushing ${LOCAL_IMAGE} to $${REMOTE_IMAGE}  && \
 	docker tag ${LOCAL_IMAGE} $${REMOTE_IMAGE} && \
@@ -44,6 +45,10 @@ docker:
 deploy:
 	serverless  deploy --force --verbose
 
+.PHONY: remove
+remove:
+	serverless  remove
+
 .PHONY: invoke
 invoke:
 	sls invoke --function handler
@@ -56,6 +61,15 @@ logs:
 waitlogs:
 	sls logs --function handler -t
 
+.PHONY: task
+task:
+	pip3 install boto3 && \
+	    python ci/task.py
+
+
 .PHONY: all
 all: setup build deploy invoke
 
+
+.PHONY: ci
+ci: all remove teardown
