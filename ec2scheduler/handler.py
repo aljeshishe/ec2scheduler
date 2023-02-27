@@ -5,7 +5,7 @@ def handler(event, context):
     print("start")
     task = os.environ.get("TASK")
     print(f"task={task}")
-    os.system(f"make stackstop && TASK='{task}' make stackstart")
+    os.system(f"TASK='{task}' make start")
     print("end")
 
 
