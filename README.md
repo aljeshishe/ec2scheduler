@@ -3,7 +3,7 @@ make
 gpg
 git-secrets
 ```
-brew install gpg make git-secrets
+brew install gpg make git-secrets serverless
 ```
 ## Execution
 
