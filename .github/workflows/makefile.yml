@@ -14,8 +14,17 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v2.4.2
+      with:
+        node-version: '16.x'
+
     - name: Install dependencies
-      run: echo hello
+      run: npm install
+
+    - name: Install Serverless Framework
+      run: npm install -g serverless
 
     - name: Git Secret Reveal Step
       uses: entrostat/git-secret-action@v3.3.0
