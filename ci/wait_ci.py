@@ -5,7 +5,7 @@ import boto3
 expected_entity = "ec2scheduler-complete"
 
 
-def run(timeout=60*3):
+def run(timeout=60*10):
     print(f"Waiting for {expected_entity} bucket...")
     s3 = boto3.resource('s3')
     start = time.time()

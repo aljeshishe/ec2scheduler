@@ -66,10 +66,14 @@ task:
 	pip3 install boto3 && \
 	    python ci/task.py
 
-
 .PHONY: all
 all: setup build deploy invoke
 
+.PHONY: waitci
+waitci:
+	pip3 install boto3 && \
+	    python ci/wait_ci.py
 
 .PHONY: ci
-ci: all remove teardown
+ci: setup build deploy invoke waitci teardown remove
+

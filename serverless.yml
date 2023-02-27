@@ -7,6 +7,7 @@ provider:
   name: aws
   runtime: python3.9
   region: eu-central-1
+  timeout: 30
   ecr:
     images:
       appimage:
@@ -22,8 +23,7 @@ package:
 functions:
     handler:
       image: appimage
+#      events:
+#      - schedule: rate(10 minutes)
       environment:
-        TASK: docker run --rm curlimages/curl:latest  -X POST https://api.telegram.org/bot5803765903:AAH2ayWpVcook4JpoiHvMzgOvJCjsLItcmw/sendMessage -d chat_id=99044115 -d text=work
-#        handler: handler.handler
-#        events:
-#        - schedule: rate(5 minutes)
+        TASK: docker run python:3.11 bash -c "git clone https://github.com/aljeshishe/ec2scheduler && cd ec2scheduler && make task"
