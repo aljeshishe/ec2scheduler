@@ -13,7 +13,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - uses: bahmutov/npm-install
+    - uses: bahmutov/npm-install@v1
     - run: npm install -g serverless
 
     - name: Git Secret Reveal Step
